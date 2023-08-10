@@ -6,7 +6,8 @@ import './App.css';
 export default function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  const handleMovieClick = (movie) => {    setSelectedMovie(movie);
+  const handleMovieClick = (movie) => {
+    setSelectedMovie(movie);
   };
 
   return (
