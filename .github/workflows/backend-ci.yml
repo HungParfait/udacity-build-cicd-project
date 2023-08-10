@@ -12,6 +12,8 @@ jobs:
         with:
           python-version: "3.10"
           cache-dependency-path: ./starter/backend/Pipfile.lock
+      - name: Install pipenv
+        run: pip install pipenv
       - name: Install dependencies
         run: pipenv install
         working-directory: ./starter/backend
@@ -28,6 +30,8 @@ jobs:
         with:
           python-version: "3.10"
           cache-dependency-path: ./starter/backend/Pipfile.lock
+      - name: Install pipenv
+        run: pip install pipenv
       - name: Install dependencies
         run: pipenv install
         working-directory: ./starter/backend
