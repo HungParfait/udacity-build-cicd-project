@@ -17,8 +17,8 @@ jobs:
       - name: Install dependencies
         run: pipenv install
         working-directory: ./starter/backend
-      - name: Run application
-        run: pipenv run lint
+      - name: Run lint
+        run: python -m flake8
         working-directory: ./starter/backend
     continue-on-error: false
   Test:
