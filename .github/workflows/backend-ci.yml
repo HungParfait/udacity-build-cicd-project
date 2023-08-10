@@ -1,0 +1,43 @@
+name: Backend CI
+on:
+  pull_request:
+    branches: master
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache-dependency-path: ./starter/backend/Pipfile.lock
+      - name: Install pipenv
+        run: pip install pipenv
+      - name: Install dependencies
+        run: pipenv install
+        working-directory: ./starter/backend
+      - name: Run lint
+        run: |
+          pipenv install flake8
+          pipenv run flake8
+        working-directory: ./starter/backend
+    continue-on-error: false
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache-dependency-path: ./starter/backend/Pipfile.lock
+      - name: Install pipenv
+        run: pip install pipenv
+      - name: Install dependencies
+        run: pipenv install
+        working-directory: ./starter/backend
+      - name: Run application
+        run: pipenv run test
+        working-directory: ./starter/backend
+    continue-on-error: false
