@@ -13,8 +13,10 @@ jobs:
           python-version: "3.10"
       - name: Install dependencies
         run: pip install
+        working-directory: ./starter/backend
       - name: Run application
         run: pipenv run lint
+        working-directory: ./starter/backend
     continue-on-error: false
   Test:
     runs-on: ubuntu-latest
@@ -26,6 +28,8 @@ jobs:
           python-version: "3.10"
       - name: Install dependencies
         run: pip install
+        working-directory: ./starter/backend
       - name: Run application
         run: pipenv run test
+        working-directory: ./starter/backend
     continue-on-error: false
