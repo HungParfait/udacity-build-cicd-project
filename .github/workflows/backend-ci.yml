@@ -1,0 +1,33 @@
+name: Backend CI
+on:
+  pull_request:
+    branches: master
+    paths:
+      - ./setup/backend
+jobs:
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: pip install
+      - name: Run application
+        run: pipenv run lint
+    continue-on-error: false
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: pip install
+      - name: Run application
+        run: pipenv run test
+    continue-on-error: false
