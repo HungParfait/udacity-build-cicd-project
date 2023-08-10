@@ -1,3 +1,4 @@
 *.lock.hcl
 *.backup
 **/.terraform/*
+node_modules
