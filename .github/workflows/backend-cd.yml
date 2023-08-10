@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - ./setup/backend
 env:
   AWS_REGION: us-east-1 # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: 102024904582.dkr.ecr.us-east-1.amazonaws.com # set this to your Amazon ECR repository name
