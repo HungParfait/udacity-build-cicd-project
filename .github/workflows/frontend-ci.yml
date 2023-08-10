@@ -24,7 +24,6 @@ jobs:
       - name: Run lint
         run: npm run lint
         working-directory: ./starter/frontend
-    continue-on-error: false
   Test:
     needs: Lint
     runs-on: ubuntu-latest
