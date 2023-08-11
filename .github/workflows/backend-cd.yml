@@ -48,6 +48,7 @@ jobs:
           kubectl version --client
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
           chmod u+x ./kustomize
+          ./kustomize version
         working-directory: ./starter/backend/k8s  
       - name: Deploy to EKS
         id: deploy-eks
