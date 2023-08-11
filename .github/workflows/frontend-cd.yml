@@ -51,6 +51,9 @@ jobs:
         working-directory: ./starter/frontend/k8s  
       - name: Deploy to EKS
         id: deploy-eks
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           aws eks update-kubeconfig --name cluster
           echo $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
