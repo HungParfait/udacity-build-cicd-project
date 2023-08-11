@@ -47,14 +47,15 @@ jobs:
           sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
           kubectl version --client
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+          chmod u+x ./kustomize
         working-directory: ./starter/backend/k8s  
       - name: Deploy to EKS
         id: deploy-eks
         run: |
           aws eks update-kubeconfig --name cluster
-          kustomize edit set image backend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          ./kustomize edit set image backend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           /# Apply the manifests to the cluster
-          kustomize build | kubectl apply -f -
+          ./kustomize build | kubectl apply -f -
         working-directory: ./starter/backend/k8s
             
