@@ -37,18 +37,25 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          docker build --build-args="REACT_APP_MOVIE_API_URL=backend" -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build --build-arg="REACT_APP_MOVIE_API_URL=backend" -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
         working-directory: ./starter/frontend
-      - name: Deployment in Kubernetes
+      - name: Install K8s tools
         run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+          kubectl version --client
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+          chmod u+x ./kustomize         
+        working-directory: ./starter/backend/k8s  
+      - name: Deploy to EKS
+        id: deploy-eks
+        run: |
           aws eks update-kubeconfig --name cluster
-          kustomize edit set image backend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          ./kustomize edit set image backend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-          /# Apply the manifests to the cluster
-          kustomize build | kubectl apply -f -
+          ./kustomize build | kubectl apply -f -
         working-directory: ./starter/frontend/k8s
           
 
