@@ -45,6 +45,7 @@ jobs:
       - name: Deploy to EKS
         id: deploy-eks
         run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
           aws eks update-kubeconfig --name cluster
           kustomize edit set image backend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
