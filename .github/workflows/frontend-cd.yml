@@ -53,6 +53,7 @@ jobs:
         id: deploy-eks
         run: |
           aws eks update-kubeconfig --name cluster
+          echo $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           ./kustomize edit set image frontend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           ./kustomize build | kubectl apply -f -
