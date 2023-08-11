@@ -55,8 +55,7 @@ jobs:
         run: |
           aws eks update-kubeconfig --name cluster
           ./kustomize edit set image backend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-          /# Apply the manifests to the cluster
+          
           ./kustomize build | kubectl apply -f -
         working-directory: ./starter/backend/k8s
             
