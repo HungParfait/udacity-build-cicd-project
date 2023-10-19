@@ -1,0 +1,17 @@
+name: udacity-build-cicd-project
+id: ari:cloud:compass:3ab5acf2-091e-497d-b8c6-6511ca9278bd:component/95fc579b-6d01-4977-b732-3068918b49e3/7a8f45e6-2c74-42df-8fe8-ec84dea64c22
+description: null
+configVersion: 1
+typeId: DATA_PIPELINE
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/HungNDCompass/udacity-build-cicd-project
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:hcl
+  - source:github
+customFields: null
