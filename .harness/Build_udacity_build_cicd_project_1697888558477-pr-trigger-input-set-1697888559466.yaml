@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_udacity_build_cicd_project_1697888558477-pr-trigger-input-set
+  identifier: Build_udacity_build_cicd_project_1697888558477prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_udacity_build_cicd_project_1697888558477
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
